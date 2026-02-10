@@ -32,6 +32,9 @@ export function createMonitorState(): MonitorState {
 }
 
 export function wrapToolWithPromptInjectionMonitor(tool: AnyAgentTool, state: MonitorState): AnyAgentTool {
+  if (tool.name === 'disable_pi_monitor') {
+    return tool;
+  }
   if (!process.env.OPENAI_API_KEY) {
     debugLog(`SKIP wrapping tool "${tool.name}" — OPENAI_API_KEY not set`);
     return tool;
